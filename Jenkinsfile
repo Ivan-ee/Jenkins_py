@@ -1,23 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.8.12'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh 'apt install -y python3.8-venv'
                 sh '/usr/bin/python3 -m venv venv'
                 sh '. venv/bin/activate'
                 sh 'pip install -r requriment.txt'
-                sh 'touch TheResult.exe' 
+                sh 'touch app.exe'
             }
         }
     }
     post {
         success {
-            archiveArtifacts artifacts: 'TheResult.exe', fingerprint: true
+            archiveArtifacts artifacts: 'app.exe', fingerprint: true
         }
     }
 }
