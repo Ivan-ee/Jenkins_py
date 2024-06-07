@@ -3,10 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo $(pwd)'
-                sh 'python -m venv venv'
+                sh '/usr/bin/python3 -m venv venv'
                 sh '. venv/bin/activate'
-                sh 'pip install -r requirements.txt'
+                sh 'pip install -r requriment.txt'
                 sh 'touch app.exe'
             }
         }
