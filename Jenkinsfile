@@ -1,11 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.8.12'
+        }
+    }
     stages {
         stage('Build') {
             steps {
-                sh '/usr/bin/python3 -m venv venv'
+                sh 'python -m venv venv'
                 sh '. venv/bin/activate'
-                sh 'pip install -r requriment.txt'
+                sh 'pip install -r requirements.txt'
+                sh 'python main.py'
                 sh 'touch app.exe'
             }
         }
@@ -16,4 +21,3 @@ pipeline {
         }
     }
 }
-
